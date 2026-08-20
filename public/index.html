@@ -201,9 +201,11 @@
   }
 
   .rank-icon{
-    width: 150px;
-    height: 150px;
+    width: 52px;
+    height: 40px;
     object-fit: contain;
+    flex-shrink: 0;
+    display: block;
   }
 
   .rank-numeral{
@@ -598,8 +600,7 @@
   function tierIconSvg(tier){
     if (!tier) return "";
     const slug = tier.toLowerCase();
-    const url = `https://raw.communitydragon.org/latest/plugins/rcp-fe-lol-static-assets/global/default/ranked-emblem/emblem-${slug}.png`;
-    return `<img class="rank-icon" src="${url}" alt="Emblema ${TIER_LABELS[tier]}" loading="lazy" />`;
+    return `<img class="rank-icon" src="assets/ranks/${slug}.png" alt="Emblema ${TIER_LABELS[tier]}" loading="lazy" />`;
   }
 
   function tierIndex(tier){ return TIERS.indexOf(tier); }
