@@ -623,7 +623,7 @@
   function tierIconSvg(tier){
     if (!tier) return "";
     const slug = tier.toLowerCase();
-    return `<img class="rank-icon" src="assets/ranks/${slug}.png" alt="Emblema ${TIER_LABELS[tier]}" loading="lazy" />`;
+    return `<img class="rank-icon" src="${slug}.png" alt="Emblema ${TIER_LABELS[tier]}" loading="lazy" />`;
   }
 
   function tierIndex(tier){ return TIERS.indexOf(tier); }
