@@ -22,7 +22,7 @@ const REGIONAL_ROUTE = "americas"; // americas | asia | europe
 const PLATFORM_ROUTE = "la2"; // la2 = LAS, la1 = LAN, na1 = NA, euw1, eun1, kr, etc.
 
 const ACCOUNTS_PATH = path.join(__dirname, "..", "accounts.config.json");
-const OUTPUT_PATH = path.join(__dirname, "..", "data", "data.json");
+const OUTPUT_PATH = path.join(__dirname, "..", "public", "data.json");
 
 const QUEUE_TYPE = "RANKED_SOLO_5x5";
 
