@@ -721,7 +721,7 @@ rows.appendChild(row);
     if (!payload.generatedAt) { meta.textContent = ""; return; }
     const d = new Date(payload.generatedAt);
     const formatted = d.toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" });
-    meta.innerHTML = `Región <strong>${(payload.region || "").toUpperCase()}</strong> · Actualizado <strong>${formatted}</strong>`;
+    meta.innerHTML = `Actualizado <strong>${formatted}</strong>`;
   }
 
   function render(payload){
