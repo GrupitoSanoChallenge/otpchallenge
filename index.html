@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OTPChallenge Grupito Sano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #10131a;
+    --ink-2: #171c26;
+    --ink-3: #212837;
+    --line: #2b3242;
+    --amber: #e8a33d;
+    --amber-dim: #8a6427;
+    --cyan: #5fd6c0;
+    --crimson: #c4432b;
+    --parchment: #ede6d6;
+    --steel: #8a93a6;
+
+    --font-display: "Oswald", "Arial Narrow", sans-serif;
+    --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: var(--font-body);
+  }
+
+  body{
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(232,163,61,0.08), transparent 45%),
+      radial-gradient(circle at 85% 10%, rgba(95,214,192,0.06), transparent 40%);
+    min-height: 100vh;
+    padding: 36px 18px 60px;
+  }
+
+  .wrap{
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Header ---------- */
+
+  header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin: 0 0 8px;
+  }
+
+  h1{
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-size: clamp(40px, 5.5vw, 60px);
+    letter-spacing: 0.02em;
+    margin: 0;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  h1 span{ color: var(--amber); }
+
+  .meta{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--steel);
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .meta strong{ color: var(--parchment); font-weight: 600; }
+
+  /* ---------- Ranking table (signature element) ---------- */
+
+  .table-section{
+    margin-bottom: 56px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--ink-2);
+  }
+
+  .table-head{
+  /* 1: # | 2: Jugador | 3: Rango | 4: V/D | 5: Perfil | 6: Nueva Columna */
+  display: grid;
+  grid-template-columns: 48px 1.4fr 160px 200px 120px 140px;
+  gap: 16px;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+  
+ /* Alineaciones del encabezado */
+.table-head span:nth-child(1){ text-align: center; } /* # */
+.table-head span:nth-child(2){ text-align: left; }   /* JUGADOR */
+.table-head span:nth-child(3){ text-align: center; } /* RANGO */
+.table-head span:nth-child(4){ text-align: center; } /* V / D */
+.table-head span:nth-child(5){ text-align: right; } /* PERFIL */
+.table-head span:nth-child(6){ text-align: right; } /* EXTRA */  
+  
+  .row{
+  display: grid;
+  grid-template-columns: 48px 1.2fr 160px 200px 120px 140px;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  }
+  
+  .row-link{ text-align: center; }
+
+  .row-extra{
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--parchment);
+}
+  
+  .row:last-child{ border-bottom: none; }
+
+  .row.rank-1{ border-left: 3px solid var(--amber); }
+  .row.rank-2{ border-left: 3px solid #c7cdd8; }
+  .row.rank-3{ border-left: 3px solid #cd8a52; }
+
+  .row-rank{
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--steel);
+    text-align: center;
+  }
+
+  .row.rank-1 .row-rank{ color: var(--amber); }
+  .row.rank-2 .row-rank{ color: #c7cdd8; }
+  .row.rank-3 .row-rank{ color: #cd8a52; }
+
+  .row-player{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .row-avatar{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--tier-color, var(--steel));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  .row-id{ min-width: 0; }
+
+  .row-alias{
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .row-riotid{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--steel);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .row-rango{
+    text-align: center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+  }
+
+  .rank-icon-wrap{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 2px;
+  }
+
+  .rank-icon{
+    width: 65px;
+    height: 52px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .rank-numeral{
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--tier-color, var(--amber));
+  }
+
+  .row-rango .tier-name{
+    color: var(--tier-color, var(--amber));
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    display:block;
+  }
+
+  .row-rango .lp-value{
+    color: var(--parchment);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    display:block;
+    margin-top: 1px;
+  }
+
+  .row-wl{ text-align: center; }
+
+  .row-wl .wl-counts{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--steel);
+    margin-bottom: 5px;
+  }
+
+  .row-wl .win-count{ color: var(--cyan); font-weight: 700; }
+  .row-wl .loss-count{ color: var(--crimson); font-weight: 700; }
+
+  .row-wl .wl-bar{
+    height: 5px;
+    border-radius: 3px;
+    background: var(--crimson);
+    overflow: hidden;
+  }
+
+  .row-wl .wl-bar-fill{ height:100%; background: var(--cyan); }
+
+  .row-wl .winrate-pct{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--steel);
+    margin-top: 4px;
+  }
+
+  .row-link{ text-align: right; }
+
+  .opgg-btn{
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    background: var(--amber);
+    padding: 7px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .opgg-btn:hover{ background: var(--cyan); }
+
+  .row-unranked{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--steel);
+    text-align: center;
+  }
+
+  @media (max-width: 720px){
+    .table-head{ display: none; }
+    .row{
+      grid-template-columns: 32px 1fr;
+      grid-template-areas:
+        "rank player"
+        "rank rango"
+        "rank wl"
+        "rank link";
+      row-gap: 8px;
+    }
+    .row-rank{ grid-area: rank; }
+    .row-player{ grid-area: player; }
+    .row-rango{ grid-area: rango; text-align: left; }
+    .row-wl{ grid-area: wl; text-align: left; }
+    .row-wl .wl-bar{ max-width: 160px; }
+    .row-link{ grid-area: link; text-align: left; }
+  }
+
+  /* ---------- Player cards ---------- */
+
+  .grid-heading{
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 20px;
+    letter-spacing: 0.02em;
+  }
+
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .card{
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after{
+    content:"";
+    position:absolute;
+    top:-40%; right:-30%;
+    width: 160px; height:160px;
+    background: var(--tier-color, var(--amber));
+    opacity: 0.08;
+    border-radius: 50%;
+    filter: blur(6px);
+  }
+
+  .card-top{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .badge{
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    background: var(--tier-color, var(--steel));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  .card-id{ min-width: 0; }
+
+  .card-alias{
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-riotid{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--steel);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-tier{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tier-color, var(--amber));
+    margin-bottom: 4px;
+    display:flex;
+    align-items:center;
+    gap: 6px;
+  }
+
+  .card-lp{
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .card-lp span{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--steel);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  .wl-row{
+    display:flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--steel);
+    margin-bottom: 6px;
+  }
+
+  .wl-row strong{ color: var(--parchment); font-weight: 500; }
+  .win-count{ color: var(--cyan); }
+  .loss-count{ color: var(--crimson); }
+
+  .wl-bar{
+    height: 6px;
+    border-radius: 4px;
+    background: var(--crimson);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+
+  .wl-bar-fill{
+    height: 100%;
+    background: var(--cyan);
+  }
+
+  .winrate-label{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--steel);
+    text-align: right;
+  }
+
+  .hot-flag{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+  }
+
+  .unranked{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--steel);
+    padding: 10px 0 4px;
+  }
+
+  footer{
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--steel);
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <p class="eyebrow">Reto de temporada · LAS</p>
+        <h1>OTPChallenge<br><span>Grupito Sano</span></h1>
+      </div>
+      <div class="meta" id="meta">Cargando datos…</div>
+    </header>
+
+    <section class="table-section">
+      <div class="table-head">
+  <span>#</span>
+  <span>Jugador</span>
+  <span>Rango</span>
+  <span>V / D</span>
+  <span>Perfil</span>
+  <span>Extra</span>
+      </div>
+      <div id="rows"></div>
+    </section>
+
+    <footer>
+      Datos vía Riot Games API · Actualizado automáticamente<br>
+      Este proyecto no está avalado por Riot Games. League of Legends y Riot Games son marcas registradas de Riot Games, Inc.
+    </footer>
+  </div>
+
+<script>
+  // Datos de ejemplo, usados solo si data.json no está disponible (p.ej. al previsualizar el diseño).
+  const SAMPLE_DATA = {
+  "generatedAt": "2026-08-19T12:00:00.000Z",
+  "region": "la2",
+  "players": [
+    {
+      "alias": "VIagrá",
+      "riotId": "VIagrá#Poppy",
+      "opggUrl": "https://www.op.gg/summoners/las/VIagr%C3%A1-Poppy",
+      "unranked": false,
+      "tier": "DIAMOND",
+      "rank": "II",
+      "leaguePoints": 58,
+      "wins": 205,
+      "losses": 144,
+      "winrate": 58.7,
+      "hotStreak": true
+    },
+    {
+      "alias": "Mordekaiser y lo",
+      "riotId": "Mordekaiser y lo#Rigby",
+      "opggUrl": "https://www.op.gg/summoners/las/Mordekaiser%20y%20lo-Rigby",
+      "unranked": false,
+      "tier": "DIAMOND",
+      "rank": "IV",
+      "leaguePoints": 25,
+      "wins": 255,
+      "losses": 195,
+      "winrate": 56.7,
+      "hotStreak": false
+    },
+    {
+      "alias": "AhriDiff",
+      "riotId": "AhriDiff#ahri",
+      "opggUrl": "https://www.op.gg/summoners/las/AhriDiff-ahri",
+      "unranked": false,
+      "tier": "EMERALD",
+      "rank": "I",
+      "leaguePoints": 25,
+      "wins": 253,
+      "losses": 206,
+      "winrate": 55.1,
+      "hotStreak": false
+    },
+    {
+      "alias": "SabeAPurpura23",
+      "riotId": "SabeAPurpura23#lulu",
+      "opggUrl": "https://www.op.gg/summoners/las/SabeAPurpura23-lulu",
+      "unranked": false,
+      "tier": "EMERALD",
+      "rank": "III",
+      "leaguePoints": 44,
+      "wins": 203,
+      "losses": 159,
+      "winrate": 56.1,
+      "hotStreak": false
+    },
+    {
+      "alias": "Bruno bucciarati",
+      "riotId": "Bruno bucciarati#italy",
+      "opggUrl": "https://www.op.gg/summoners/las/Bruno%20bucciarati-italy",
+      "unranked": false,
+      "tier": "EMERALD",
+      "rank": "IV",
+      "leaguePoints": 10,
+      "wins": 283,
+      "losses": 236,
+      "winrate": 54.5,
+      "hotStreak": false
+    }
+  ]
+};
+
+  const TIERS = [
+    "IRON","BRONZE","SILVER","GOLD","PLATINUM","EMERALD",
+    "DIAMOND","MASTER","GRANDMASTER","CHALLENGER"
+  ];
+
+  const TIER_LABELS = {
+    IRON: "Hierro", BRONZE: "Bronce", SILVER: "Plata", GOLD: "Oro",
+    PLATINUM: "Platino", EMERALD: "Esmeralda", DIAMOND: "Diamante",
+    MASTER: "Maestro", GRANDMASTER: "Gran Maestro", CHALLENGER: "Retador"
+  };
+
+  const TIER_COLORS = {
+    IRON: "#6b7280", BRONZE: "#a9714b", SILVER: "#9aa5b1", GOLD: "#e8a33d",
+    PLATINUM: "#4fb8a8", EMERALD: "#2fae67", DIAMOND: "#5fa8e8",
+    MASTER: "#b06fe0", GRANDMASTER: "#e05f6f", CHALLENGER: "#f2d34d"
+  };
+
+  const RANK_VALUE = { IV: 0, III: 1, II: 2, I: 3 };
+  const HAS_DIVISIONS = new Set(["IRON","BRONZE","SILVER","GOLD","PLATINUM","EMERALD","DIAMOND"]);
+
+  // Emblema oficial de rango, servido por Community Dragon (assets de Riot Games
+  // liberados para uso de apps de terceros bajo la política "Legal Jibber Jabber").
+  function tierIconSvg(tier){
+    if (!tier) return "";
+    const slug = tier.toLowerCase();
+    return `<img class="rank-icon" src="assets/ranks/${slug}.png" alt="Emblema ${TIER_LABELS[tier]}" loading="lazy" />`;
+  }
+
+  function tierIndex(tier){ return TIERS.indexOf(tier); }
+
+  // Ordena de mejor a peor: por tier, luego división, luego PL.
+  function rankPlayers(players){
+    return [...players].sort((a, b) => {
+      const ai = a.tier ? tierIndex(a.tier) : -1;
+      const bi = b.tier ? tierIndex(b.tier) : -1;
+      if (ai !== bi) return bi - ai;
+      const ar = HAS_DIVISIONS.has(a.tier) ? (RANK_VALUE[a.rank] ?? 0) : 0;
+      const br = HAS_DIVISIONS.has(b.tier) ? (RANK_VALUE[b.rank] ?? 0) : 0;
+      if (ar !== br) return br - ar;
+      return (b.leaguePoints || 0) - (a.leaguePoints || 0);
+    });
+  }
+
+  function initials(alias){
+    return alias.trim().slice(0,2).toUpperCase();
+  }
+
+  function renderRows(players){
+    const rows = document.getElementById("rows");
+    rows.innerHTML = "";
+
+    const ranked = rankPlayers(players);
+
+    ranked.forEach((p, i) => {
+      const position = i + 1;
+      const color = p.tier ? TIER_COLORS[p.tier] : "#4a5264";
+      const row = document.createElement("div");
+      row.className = "row" + (position <= 3 ? ` rank-${position}` : "");
+      row.style.setProperty("--tier-color", color);
+
+      const opggBtn = p.opggUrl
+        ? `<a class="opgg-btn" href="${p.opggUrl}" target="_blank" rel="noopener noreferrer">OP.GG</a>`
+        : "";
+
+      if (p.error || p.unranked) {
+   const msg = p.error ? "Sin datos" : "Sin ranked";
+   row.innerHTML = `
+     <div class="row-rank">${position}</div>
+     <div class="row-player">
+       <div class="row-avatar" style="background:#4a5264;">${initials(p.alias)}</div>
+       <div class="row-id">
+         <div class="row-alias">${p.alias}</div>
+         <div class="row-riotid">${p.riotId || ""}</div>
+       </div>
+     </div>
+     <div class="row-unranked">${msg}</div>
+     <div class="row-unranked">—</div>
+     <div class="row-link">${opggBtn}</div>
+     <div class="row-extra">—</div>
+   `;
+   rows.appendChild(row);
+   return;
+ }
+
+      const totalGames = p.wins + p.losses;
+      const winPct = totalGames > 0 ? (p.wins / totalGames) * 100 : 0;
+
+      row.innerHTML = `
+  <div class="row-rank">${position}</div>
+  <div class="row-player">
+    <div class="row-avatar">${initials(p.alias)}</div>
+    <div class="row-id">
+      <div class="row-alias">${p.alias}</div>
+      <div class="row-riotid">${p.riotId}</div>
+    </div>
+  </div>
+  <div class="row-rango">
+    <div class="rank-icon-wrap">
+      ${tierIconSvg(p.tier)}
+      <span class="rank-numeral">${p.rank || ""}</span>
+    </div>
+    <div class="rank-icon-wrap" style="align-items:flex-start;">
+      <span class="tier-name">${TIER_LABELS[p.tier]}</span>
+      <span class="lp-value">${p.leaguePoints} PL</span>
+    </div>
+  </div>
+  <div class="row-wl">
+    <div class="wl-counts"><span class="win-count">${p.wins}V</span> · <span class="loss-count">${p.losses}D</span></div>
+    <div class="wl-bar"><div class="wl-bar-fill" style="width:${winPct}%"></div></div>
+    <div class="winrate-pct">${p.winrate ?? "—"}% winrate</div>
+  </div>
+  <div class="row-link">${opggBtn}</div>
+  <div class="row-extra">Dato Extra</div>
+`;
+rows.appendChild(row);
+    });
+  }
+
+  function renderMeta(payload){
+    const meta = document.getElementById("meta");
+    if (!payload.generatedAt) { meta.textContent = ""; return; }
+    const d = new Date(payload.generatedAt);
+    const formatted = d.toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" });
+    meta.innerHTML = `Región <strong>${(payload.region || "").toUpperCase()}</strong> · Actualizado <strong>${formatted}</strong>`;
+  }
+
+  function render(payload){
+    renderMeta(payload);
+    renderRows(payload.players);
+  }
+
+  fetch("data.json", { cache: "no-store" })
+    .then(res => { if (!res.ok) throw new Error("no data.json"); return res.json(); })
+    .then(render)
+    .catch(() => render(SAMPLE_DATA));
+</script>
+</body>
+</html>
