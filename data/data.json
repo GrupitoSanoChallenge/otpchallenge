@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2026-08-19T12:00:00.000Z",
+  "region": "la2",
+  "players": [
+    {
+      "alias": "VIagrá",
+      "riotId": "VIagrá#Poppy",
+      "opggUrl": "https://www.op.gg/summoners/las/VIagr%C3%A1-Poppy",
+      "unranked": false,
+      "tier": "DIAMOND",
+      "rank": "II",
+      "leaguePoints": 58,
+      "wins": 205,
+      "losses": 144,
+      "winrate": 58.7,
+      "hotStreak": true
+    },
+    {
+      "alias": "Mordekaiser y lo",
+      "riotId": "Mordekaiser y lo#Rigby",
+      "opggUrl": "https://www.op.gg/summoners/las/Mordekaiser%20y%20lo-Rigby",
+      "unranked": false,
+      "tier": "DIAMOND",
+      "rank": "IV",
+      "leaguePoints": 25,
+      "wins": 255,
+      "losses": 195,
+      "winrate": 56.7,
+      "hotStreak": false
+    },
+    {
+      "alias": "AhriDiff",
+      "riotId": "AhriDiff#ahri",
+      "opggUrl": "https://www.op.gg/summoners/las/AhriDiff-ahri",
+      "unranked": false,
+      "tier": "EMERALD",
+      "rank": "I",
+      "leaguePoints": 25,
+      "wins": 253,
+      "losses": 206,
+      "winrate": 55.1,
+      "hotStreak": false
+    },
+    {
+      "alias": "SabeAPurpura23",
+      "riotId": "SabeAPurpura23#lulu",
+      "opggUrl": "https://www.op.gg/summoners/las/SabeAPurpura23-lulu",
+      "unranked": false,
+      "tier": "EMERALD",
+      "rank": "III",
+      "leaguePoints": 44,
+      "wins": 203,
+      "losses": 159,
+      "winrate": 56.1,
+      "hotStreak": false
+    },
+    {
+      "alias": "Bruno bucciarati",
+      "riotId": "Bruno bucciarati#italy",
+      "opggUrl": "https://www.op.gg/summoners/las/Bruno%20bucciarati-italy",
+      "unranked": false,
+      "tier": "EMERALD",
+      "rank": "IV",
+      "leaguePoints": 10,
+      "wins": 283,
+      "losses": 236,
+      "winrate": 54.5,
+      "hotStreak": false
+    }
+  ]
+}
