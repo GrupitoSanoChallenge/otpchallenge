@@ -106,32 +106,44 @@
   }
 
   .table-head{
-    display: grid;
-    grid-template-columns: 48px 1fr 150px 200px 110px;
-    gap: 12px;
-    padding: 12px 18px;
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--steel);
-    border-bottom: 1px solid var(--line);
-  }
+  /* 1: # | 2: Jugador | 3: Rango | 4: V/D | 5: Perfil | 6: Nueva Columna */
+  display: grid;
+  grid-template-columns: 48px 1.2fr 160px 200px 120px 140px;
+  gap: 16px;
+  padding: 12px 20px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+  border-bottom: 1px solid var(--line);
+}
 
-  .table-head span:nth-child(3),
-  .table-head span:nth-child(4){ text-align: center; }
-  .table-head span:last-child{ text-align: right; }
+ /* Alineaciones del encabezado */
+.table-head span:nth-child(3),
+.table-head span:nth-child(4),
+.table-head span:nth-child(5){ text-align: center; }
+.table-head span:last-child{ text-align: right; }
 
   .row{
-    display: grid;
-    grid-template-columns: 48px 1fr 150px 200px 110px;
-    gap: 12px;
-    align-items: center;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--line);
-    position: relative;
-  }
+  display: grid;
+  grid-template-columns: 48px 1.2fr 160px 200px 120px 140px;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+  
+  .row-link{ text-align: center; }
 
+  .row-extra{
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--parchment);
+}
+  
   .row:last-child{ border-bottom: none; }
 
   .row.rank-1{ border-left: 3px solid var(--amber); }
@@ -493,11 +505,12 @@
 
     <section class="table-section">
       <div class="table-head">
-        <span>#</span>
-        <span>Jugador</span>
-        <span>Rango</span>
-        <span>V / D</span>
-        <span>Perfil</span>
+  <span>#</span>
+  <span>Jugador</span>
+  <span>Rango</span>
+  <span>V / D</span>
+  <span>Perfil</span>
+  <span>Extra</span>
       </div>
       <div id="rows"></div>
     </section>
@@ -647,54 +660,56 @@
         : "";
 
       if (p.error || p.unranked) {
-        const msg = p.error ? "Sin datos" : "Sin ranked";
-        row.innerHTML = `
-          <div class="row-rank">${position}</div>
-          <div class="row-player">
-            <div class="row-avatar" style="background:#4a5264;">${initials(p.alias)}</div>
-            <div class="row-id">
-              <div class="row-alias">${p.alias}</div>
-              <div class="row-riotid">${p.riotId || ""}</div>
-            </div>
-          </div>
-          <div class="row-unranked">${msg}</div>
-          <div class="row-unranked">—</div>
-          <div class="row-link">${opggBtn}</div>
-        `;
-        rows.appendChild(row);
-        return;
-      }
+   const msg = p.error ? "Sin datos" : "Sin ranked";
+   row.innerHTML = `
+     <div class="row-rank">${position}</div>
+     <div class="row-player">
+       <div class="row-avatar" style="background:#4a5264;">${initials(p.alias)}</div>
+       <div class="row-id">
+         <div class="row-alias">${p.alias}</div>
+         <div class="row-riotid">${p.riotId || ""}</div>
+       </div>
+     </div>
+     <div class="row-unranked">${msg}</div>
+     <div class="row-unranked">—</div>
+     <div class="row-link">${opggBtn}</div>
+     <div class="row-extra">—</div>
+   `;
+   rows.appendChild(row);
+   return;
+ }
 
       const totalGames = p.wins + p.losses;
       const winPct = totalGames > 0 ? (p.wins / totalGames) * 100 : 0;
 
       row.innerHTML = `
-        <div class="row-rank">${position}</div>
-        <div class="row-player">
-          <div class="row-avatar">${initials(p.alias)}</div>
-          <div class="row-id">
-            <div class="row-alias">${p.alias}</div>
-            <div class="row-riotid">${p.riotId}</div>
-          </div>
-        </div>
-        <div class="row-rango">
-          <div class="rank-icon-wrap">
-            ${tierIconSvg(p.tier)}
-            <span class="rank-numeral">${p.rank || ""}</span>
-          </div>
-          <div class="rank-icon-wrap" style="align-items:flex-start;">
-            <span class="tier-name">${TIER_LABELS[p.tier]}</span>
-            <span class="lp-value">${p.leaguePoints} PL</span>
-          </div>
-        </div>
-        <div class="row-wl">
-          <div class="wl-counts"><span class="win-count">${p.wins}V</span> · <span class="loss-count">${p.losses}D</span></div>
-          <div class="wl-bar"><div class="wl-bar-fill" style="width:${winPct}%"></div></div>
-          <div class="winrate-pct">${p.winrate ?? "—"}% winrate</div>
-        </div>
-        <div class="row-link">${opggBtn}</div>
-      `;
-      rows.appendChild(row);
+  <div class="row-rank">${position}</div>
+  <div class="row-player">
+    <div class="row-avatar">${initials(p.alias)}</div>
+    <div class="row-id">
+      <div class="row-alias">${p.alias}</div>
+      <div class="row-riotid">${p.riotId}</div>
+    </div>
+  </div>
+  <div class="row-rango">
+    <div class="rank-icon-wrap">
+      ${tierIconSvg(p.tier)}
+      <span class="rank-numeral">${p.rank || ""}</span>
+    </div>
+    <div class="rank-icon-wrap" style="align-items:flex-start;">
+      <span class="tier-name">${TIER_LABELS[p.tier]}</span>
+      <span class="lp-value">${p.leaguePoints} PL</span>
+    </div>
+  </div>
+  <div class="row-wl">
+    <div class="wl-counts"><span class="win-count">${p.wins}V</span> · <span class="loss-count">${p.losses}D</span></div>
+    <div class="wl-bar"><div class="wl-bar-fill" style="width:${winPct}%"></div></div>
+    <div class="winrate-pct">${p.winrate ?? "—"}% winrate</div>
+  </div>
+  <div class="row-link">${opggBtn}</div>
+  <div class="row-extra">Dato Extra</div>
+`;
+rows.appendChild(row);
     });
   }
 
