@@ -38,10 +38,10 @@
       "opggUrl": "https://www.op.gg/summoners/las/AhriDiff-ahri",
       "puuid": "c4KB3vj6fpW_eTPJKtE97qHVJ3vWpktodJhG6cMxnNh1Nup2Em6Fz4s5ZbbZ5prQqx7ibFs3vpXHfA",
       "updatedAt": "2026-08-20T18:02:06.488Z",
-      "unranked": false,
-      "tier": "CHALLENGER",
+      "unranked": true,
+      "tier": null,
       "rank": null,
-      "leaguePoints": 3100,
+      "leaguePoints": 0,
       "wins": 0,
       "losses": 0,
       "winrate": null
