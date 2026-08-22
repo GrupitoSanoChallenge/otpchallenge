@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-22T17:43:30.666Z",
+  "generatedAt": "2026-08-22T18:56:40.684Z",
   "region": "la2",
   "players": [
     {
@@ -7,7 +7,7 @@
       "riotId": "VIagrá#Poppy",
       "opggUrl": "https://www.op.gg/summoners/las/VIagr%C3%A1-Poppy",
       "puuid": "BUm3oqYreH1H6g5ToDVBiCbs-0PY5Vu0MFlF_NrjbPgPfXUmB4ZtGf4y5BZI6HdzN_SxxNRFPAwSHQ",
-      "updatedAt": "2026-08-22T17:43:30.355Z",
+      "updatedAt": "2026-08-22T18:56:39.836Z",
       "unranked": false,
       "tier": "BRONZE",
       "rank": "I",
@@ -22,7 +22,7 @@
       "riotId": "Mordekaiser y lo#Rigby",
       "opggUrl": "https://www.op.gg/summoners/las/Mordekaiser%20y%20lo-Rigby",
       "puuid": "Fh5DPewDBmU8zsrOD2P_rLygepOnSuhdj1MtOZeOrWIIlvI1AnicFZrbe6TJL-PtqGinm1DmHhuvIA",
-      "updatedAt": "2026-08-22T17:43:30.434Z",
+      "updatedAt": "2026-08-22T18:56:40.054Z",
       "unranked": false,
       "tier": "BRONZE",
       "rank": "II",
@@ -37,7 +37,7 @@
       "riotId": "AhriDiff#ahri",
       "opggUrl": "https://www.op.gg/summoners/las/AhriDiff-ahri",
       "puuid": "c4KB3vj6fpW_eTPJKtE97qHVJ3vWpktodJhG6cMxnNh1Nup2Em6Fz4s5ZbbZ5prQqx7ibFs3vpXHfA",
-      "updatedAt": "2026-08-22T17:43:30.508Z",
+      "updatedAt": "2026-08-22T18:56:40.255Z",
       "unranked": true,
       "tier": null,
       "rank": null,
@@ -51,7 +51,7 @@
       "riotId": "SabeAPurpura23#lulu",
       "opggUrl": "https://www.op.gg/summoners/las/SabeAPurpura23-lulu",
       "puuid": "b0od0WjsYX-UN-Rb21tc-1lIX1b0yVgrOmJTlCyP41Uo_fYgGymD5Bq1jV5VbuUBE5q6wjt4dfRFfw",
-      "updatedAt": "2026-08-22T17:43:30.586Z",
+      "updatedAt": "2026-08-22T18:56:40.464Z",
       "unranked": true,
       "tier": null,
       "rank": null,
@@ -61,11 +61,11 @@
       "winrate": null
     },
     {
-      "alias": "Patitas Sucias",
-      "riotId": "Patitas Sucias#ñau",
-      "opggUrl": "https://op.gg/es/lol/summoners/las/Patitas%20Sucias-%C3%B1au",
+      "alias": "Bruno bucciarati",
+      "riotId": "Bruno bucciarati#italy",
+      "opggUrl": "https://www.op.gg/summoners/las/Bruno%20bucciarati-italy",
       "puuid": "KqkpEyyEmrFu7VTGloVOkygFB3hIFRINo-lNlT9deW83GOtMJhmfDqWI-ZqQpLJbwq8XT-u2PUcRGw",
-      "updatedAt": "2026-08-22T17:43:30.666Z",
+      "updatedAt": "2026-08-22T18:56:40.684Z",
       "unranked": true,
       "tier": null,
       "rank": null,
