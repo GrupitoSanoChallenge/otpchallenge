@@ -2,8 +2,8 @@ name: Actualizar datos de SoloQ
 
 on:
   schedule:
-    # Cada 5 minutos. Ajusta la frecuencia según lo necesites.
-    - cron: "*/20 * * * *"
+    # Cada 30 minutos. Ajusta la frecuencia según lo necesites.
+    - cron: "*/30 * * * *"
   workflow_dispatch: {} # permite correrlo manualmente desde la pestaña Actions
 
 jobs:
